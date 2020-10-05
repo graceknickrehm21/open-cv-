@@ -7,7 +7,7 @@ import imutils
 import cv2
 
 #resizing images
-ap = argparse.ArgumentParser()#lines 63 through 69 set up the argument parser and loading and displaying the image
+ap = argparse.ArgumentParser()#lines 10-16 set up the argument parser and loading and displaying the image
 ap.add_argument("-i", "--image", required = True,
 help = "Path to the image")
 args = vars(ap.parse_args())

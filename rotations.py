@@ -1,5 +1,10 @@
 import cv2
-import numpy as np 
+import numpy as np
+
+import numpy as np
+import argparse
+import imutils
+import cv2
 
 #image rotations --> rotating an image by some angle x
 ap = argparse.ArgumentParser() #construcing an argument parser with the path to the image
