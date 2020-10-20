@@ -60,6 +60,8 @@ cv2.waitKey(0)
 (thresh, img1) = cv2.threshold(im_gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 cv2.imwrite('bw_image.png', img1)
 
+#need to find a color that is in all the people but not in everything else 
+#pixel is turned off if it has a value of zero and on if it has a value greater than zero
 #OR: A bitwise OR is true if either of the two pixels are greater than zero.
 bitwiseOr = cv2.bitwise_or(img1) #applying OR to the shapes
 cv2.imshow("OR", bitwiseOr)
