@@ -1,7 +1,7 @@
 import numpy as np
 import argparse
 import cv2
-#adaptive thresholdhing = don't have to manyal supply T value
+#adaptive thresholdhing = don't have to manually supply T value
 ap = argparse.ArgumentParser() #constructing arg parser and loading image
 ap.add_argument("-i", "--image", required = True,
 help = "Path to the image")

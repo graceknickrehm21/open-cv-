@@ -115,48 +115,6 @@ def detectPeople(args):
         b64 = convert_to_base64(image)
         context = {"image": b64}
 
-        # Sends the result
-        req = sendToUbidots(TOKEN, DEVICE, VARIABLE,
-                            len(result), context=context)
-        if req.status_code >= 400:
-            print("[ERROR] Could not send data to Ubidots")
-            return req
-
-def buildPayload(variable, value, context):
-    return {variable: {"value": value, "context": context}}
-
-def sendToUbidots(token, device, variable, value, context={}, industrial=True):
-    # Builds the endpoint
-    url = URL_INDUSTRIAL if industrial else URL_EDUCATIONAL
-    url = "{}/api/v1.6/devices/{}".format(url, device)
-
-    payload = buildPayload(variable, value, context)
-    headers = {"X-Auth-Token": token, "Content-Type": "application/json"}
-
-    attempts = 0
-    status = 400
-
-    while status >= 400 and attempts <= 5:
-        req = requests.post(url=url, headers=headers, json=payload)
-        status = req.status_code
-        attempts += 1
-        time.sleep(1)
-
-return req
-
-#parses and returns as a dictionary the arguments passed through terminal
-#image is the path to the image file inside your system
-#camera is a variable that when set to 'true" calls the cameraDetect() method
-#def argsParser():
-    #ap = argparse.ArgumentParser()
-    #ap.add_argument("-i", "--image", default=None,
-                #    help="path to image test file directory")
-    #ap.add_argument("-c", "--camera", default=False,
-        #            help="Set as true if you wish to use the camera")
-    #args = vars(ap.parse_args())
-
-    #return args
-
 def main():
     args = argsParser()
     detectPeople(args)
@@ -164,3 +122,12 @@ def main():
 #main() function calls the arguments from the console and launches the specified routine
 if __name__ == '__main__':
     main()
+
+# show some information on the number of bounding boxes
+    filename = imagePath[imagePath.rfind("/") + 1:]
+    print("[INFO] {}: {} original boxes, {} after suppression".format(
+        filename, len(rects), len(pick)))
+    # show the output images
+    cv2.imshow("Before", clone)
+    cv2.imshow("After", image)
+    cv2.waitKey(0)
