@@ -1,6 +1,5 @@
 #import the necessary packages
-from imutils.object_detection
-import non_max_suppression
+from cv2 import non_max_suppression
 import numpy as np
 import imutils #lets you perorm transfomations from the results
 import cv2 #OpenCV Python wrapper
@@ -33,7 +32,7 @@ def detector(image):
     clone = image.copy()
     #detect people in the image
     (rects,weights) = HOGCV.detecMultiScale(image, winStride = (8,8)) #detectMultiScale() method is from the HOG object and lets me analyze the image and know if a person exists using the classification from the SVM
-    padding = (32,32, scale = 1.05)
+    #padding = (32,32, scale = 1.05)
 
 #applies non-max suppression from imutils package to kick off overlapped boxes
 #uses a large overlap threshold to maintain overlapping bodes that are still people
@@ -59,9 +58,9 @@ def localDetect(image_path):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-return (result, image)
+    return (result, image)
 
-#calling the detector() method and paint boxes around the detectPeople#convert_to_base64() converts the image to a base 64 string
+#calling the detector() method and paint boxes around the detectPeople, #convert_to_base64() converts the image to a base 64 string
 def cameraDetect(token,device,variable, sample_time=5):
 
     cap = cv2.VideoCapture(0)
@@ -131,3 +130,5 @@ if __name__ == '__main__':
     cv2.imshow("Before", clone)
     cv2.imshow("After", image)
     cv2.waitKey(0)
+
+    #return the number of people:
